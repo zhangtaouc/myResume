@@ -20,6 +20,7 @@ module.exports = {
   rules: {
     // override/add rules settings here, such as:
     // 关闭any警告
-    '@typescript-eslint/no-explicit-any': ['off']
+    '@typescript-eslint/no-explicit-any': ['off'],
+    'vue/multi-word-component-names': 'off'
   }
 }

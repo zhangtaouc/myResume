@@ -3,15 +3,15 @@
   <div class="operate-box">
     <div class="box">
       <div class="name">id:</div>
-      <input type="text" v-model="userData.id" />
+      <input v-model="userData.id" type="text" />
     </div>
     <div class="box">
       <div class="name">username:</div>
-      <input type="text" v-model="userData.username" />
+      <input v-model="userData.username" type="text" />
     </div>
     <div class="box">
       <div class="name">password:</div>
-      <input type="text" v-model="userData.password" />
+      <input v-model="userData.password" type="text" />
     </div>
   </div>
   <p>
@@ -21,9 +21,7 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useBaseStore } from '@/store/base'
 import { getUserList } from '@/utils/api'
-const store = useBaseStore()
 const title = ref('这是首页')
 const userData = ref({
   id: '',
@@ -32,7 +30,7 @@ const userData = ref({
 })
 
 const getUse = () => {
-  getUserList().then(data => {})
+  getUserList()
 }
 
 const addUser = () => {
