@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { responseData, requestData } from '@/map/interface'
 
-//1. 创建axios对象
+// 1. 创建axios对象
 const request = axios.create({
   // baseURL: 'request://testapi.xuexiluxian.cn',
 })
 
-//2. 请求拦截器
+// 2. 请求拦截器
 request.interceptors.request.use(
-  config => {
+  (config: any) => {
     console.warn('请求参数', config)
     return config
   },
@@ -17,10 +17,9 @@ request.interceptors.request.use(
   }
 )
 
-//3. 响应拦截器
+// 3. 响应拦截器
 request.interceptors.response.use(
   response => {
-    //判断code码
     console.warn('响应参数', response)
     return Promise.resolve(response.data)
   },

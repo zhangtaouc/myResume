@@ -1,11 +1,7 @@
 import { httpGet } from './request'
-import {
-  User,
-  UserList,
-  UserListResponse,
-  requestMethod
-} from '@/map/interface'
+import { UserListResponse } from '@/map/interface'
 
+// 获取用户
 export function getUserList(): Promise<UserListResponse> {
-  return httpGet('http://www.boredapi.com/api/activity/')
+  return httpGet('http://localhost:8081/student/getAll')
 }

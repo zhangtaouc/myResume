@@ -1,20 +1,20 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     meta: {
-        title: '首页',
-        keepAlive: true,
-        requireAuth: false
+      title: '首页',
+      keepAlive: true,
+      requireAuth: false
     },
-    component: () => import('@/pages/Home.vue')
+    component: () => import('@/pages/home.vue')
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-});
-export default router;
+})
+export default router
