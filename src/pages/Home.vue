@@ -16,7 +16,7 @@
   </div>
   <p>
     <input type="submit" value="查询" @click="getUse" />
-    <input type="submit" value="添加" />
+    <input type="submit" value="添加" @click="addUser" />
   </p>
 </template>
 <script setup lang="ts">
@@ -32,12 +32,13 @@ const userData = ref({
 })
 
 const getUse = () => {
-  getUserList().then(data => {
-    console.log('张涛', data)
-  })
+  getUserList().then(data => {})
 }
 
-const addUser = () => {}
+const addUser = () => {
+  const data = userData.value
+  console.log(data)
+}
 </script>
 
 <style scoped lang="less">
