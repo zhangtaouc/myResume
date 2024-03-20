@@ -13,9 +13,8 @@ interface requestData {}
 
 // 用户类型
 interface User {
-  id: Number
-  password: String
-  username: String
+  name: string
+  address: string
 }
 
 // 用户列表

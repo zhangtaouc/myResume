@@ -1,13 +1,12 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <RouterView/>
+  <RouterView />
 </template>
 
-<style scoped>
+<style>
 body {
   padding: 0;
-  margin: 0;
+  margin: 0 !important;
 }
 </style>
