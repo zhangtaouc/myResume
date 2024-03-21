@@ -61,6 +61,7 @@
                 </el-table-column>
               </el-table>
             </div>
+            <div><RouterView /></div>
           </el-main>
           <el-footer>Footer</el-footer>
         </el-container>
@@ -70,7 +71,7 @@
 </template>
 
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
+import { onMounted, Ref, ref } from 'vue'
 import {
   addUserApi,
   deleteUserApi,
@@ -81,6 +82,7 @@ import {
 import { ElMessageBox } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 import { UserList } from '@/map/interface'
+import router from '@/router'
 import { messageError, messageSuccess, messageWarnDialog } from '@/utils/tips'
 const title = ref('这是首页')
 const userData = ref({
@@ -155,6 +157,10 @@ const editUser = (index: number) => {
     }
   })
 }
+
+onMounted(() => {
+  console.log('路由', router.currentRoute.value)
+})
 </script>
 
 <style scoped lang="less">
