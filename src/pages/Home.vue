@@ -35,6 +35,9 @@
                 /><el-button type="success" plain @click="getUserByName"
                   >查询</el-button
                 >
+                <el-button type="success" plain @click="getUserListByName"
+                  >模糊查询</el-button
+                >
               </div>
               <el-table :data="userList" height="250" style="width: 550px">
                 <el-table-column prop="name" label="姓名" width="180" />
@@ -77,7 +80,8 @@ import {
   deleteUserApi,
   editUserApi,
   getUserByNameApi,
-  getUserListApi
+  getUserListApi,
+  getUserListByNameApi
 } from '@/utils/api'
 import { ElMessageBox } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
@@ -107,6 +111,17 @@ const getUserByName = () => {
     return
   }
   getUserByNameApi(searchNameValue.value).then((result: any) => {
+    console.log('获取到数据', result)
+    userList.value = result.retData
+  })
+}
+
+const getUserListByName = () => {
+  if (!searchNameValue.value) {
+    messageError('请输入名字')
+    return
+  }
+  getUserListByNameApi(searchNameValue.value).then((result: any) => {
     console.log('获取到数据', result)
     userList.value = result.retData
   })

@@ -6,6 +6,11 @@ export function getUserListApi(): Promise<UserListResponse> {
   return httpGet('http://localhost:8081/student/getAll')
 }
 
+// 模糊查询用户
+export function getUserListByNameApi(name: string): Promise<UserListResponse> {
+  return httpGet(`http://localhost:8081/student/getUserListByName?name=${name}`)
+}
+
 export function getUserByNameApi(name: string): Promise<UserListResponse> {
   return httpGet('http://localhost:8081/student/getStudentByName?name=' + name)
 }
