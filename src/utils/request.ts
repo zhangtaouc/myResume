@@ -45,3 +45,10 @@ export function httpPost(
     data
   })
 }
+
+export function httpDelete(url: string): Promise<responseData> {
+  return request({
+    url,
+    method: 'delete'
+  })
+}

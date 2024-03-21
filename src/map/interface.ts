@@ -19,7 +19,7 @@ interface User {
 
 // 用户列表
 interface UserList {
-  userList: Array<User>
+  [index: number]: User
 }
 
 // 用户列表响应数据格式

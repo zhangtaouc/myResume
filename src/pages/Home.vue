@@ -19,10 +19,23 @@
                 placeholder="请输入地址"
                 clearable
               />
-              <el-button type="primary" plain>添加</el-button>
+              <el-button type="primary" plain @click="addStudent"
+                >添加</el-button
+              >
               <el-button type="success" plain @click="getUsers">获取</el-button>
             </div>
             <div>
+              <div>
+                <el-input
+                  v-model="searchNameValue"
+                  style="width: 240px"
+                  size="large"
+                  placeholder="请输入姓名"
+                  :suffix-icon="Search"
+                /><el-button type="success" plain @click="getUserByName"
+                  >查询</el-button
+                >
+              </div>
               <el-table :data="userList" height="250" style="width: 550px">
                 <el-table-column prop="name" label="姓名" width="180" />
                 <el-table-column prop="address" label="地址" width="180" />
@@ -32,7 +45,15 @@
                       link
                       type="primary"
                       size="small"
-                      @click.prevent="deletuUser(scope.$index)"
+                      @click.prevent="editUser(scope.$index)"
+                    >
+                      编辑
+                    </el-button>
+                    <el-button
+                      link
+                      type="primary"
+                      size="small"
+                      @click.prevent="deleteUser(scope.$index)"
                     >
                       删除
                     </el-button>
@@ -50,31 +71,89 @@
 
 <script setup lang="ts">
 import { Ref, ref } from 'vue'
-import { getUserList } from '@/utils/api'
-import { User } from '@/map/interface'
+import {
+  addUserApi,
+  deleteUserApi,
+  editUserApi,
+  getUserByNameApi,
+  getUserListApi
+} from '@/utils/api'
+import { ElMessageBox } from 'element-plus'
+import { Search } from '@element-plus/icons-vue'
+import { UserList } from '@/map/interface'
+import { messageError, messageSuccess, messageWarnDialog } from '@/utils/tips'
 const title = ref('这是首页')
 const userData = ref({
   name: '',
   address: ''
 })
 
-const userList: Ref<Array<User>> = ref([])
+const searchNameValue = ref('')
+
+const userList: Ref<UserList> = ref([])
 
 const getUsers = () => {
-  getUserList().then((result: any) => {
+  getUserListApi().then((result: any) => {
+    console.log('获取到数据', result)
+    userList.value = result.retData
+  })
+}
+
+const getUserByName = () => {
+  if (!searchNameValue.value) {
+    messageError('请输入名字')
+    return
+  }
+  getUserByNameApi(searchNameValue.value).then((result: any) => {
     console.log('获取到数据', result)
     userList.value = result.retData
   })
 }
 
 const addStudent = () => {
-  const data = userData.value
-  console.log(data)
+  if (!userData.value.name || !userData.value.address) {
+    messageError('名字和地址不能为空！')
+  } else {
+    addUserApi(userData.value).then(() => {
+      messageSuccess('添加成功！')
+      getUsers()
+    })
+  }
 }
 
-const deletuUser = (index: number) => {
+const deleteUser = (index: number) => {
   console.log(index)
-  addStudent()
+  const name: string = userList.value[index].name
+  messageWarnDialog(`确定删除【${name}】吗？`).then(() => {
+    deleteUserApi(name).then(() => {
+      messageSuccess('删除成功！')
+      getUsers()
+    })
+  })
+}
+
+const editUser = (index: number) => {
+  console.log(userList.value[index].name)
+  ElMessageBox.prompt(
+    `姓名【${userList.value[index].name}】，请输入地址`,
+    '提示',
+    {
+      confirmButtonText: '确认修改',
+      cancelButtonText: '取消'
+    }
+  ).then(({ value }) => {
+    if (value) {
+      editUserApi({
+        name: userList.value[index].name,
+        address: value
+      }).then(() => {
+        messageSuccess('修改成功！')
+        getUsers()
+      })
+    } else {
+      messageError('地址不能为空')
+    }
+  })
 }
 </script>
 
