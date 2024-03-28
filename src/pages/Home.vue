@@ -1,9 +1,43 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header>{{ title }}</el-header>
+      <el-header
+        ><div class="title">{{ title }}</div>
+        <el-avatar> 张涛 </el-avatar>
+      </el-header>
       <el-container>
-        <el-aside width="100px">Aside</el-aside>
+        <div class="page-aside">
+          <div class="collapse">
+            <el-icon size="30" color="white" @click="isCollapse = !isCollapse">
+              <DArrowLeft v-if="isCollapse" />
+              <DArrowRight v-else />
+            </el-icon>
+          </div>
+          <el-menu
+            default-active="2"
+            class="el-menu-vertical-demo"
+            :collapse="isCollapse"
+            @open="handleOpen"
+            @close="handleClose"
+          >
+            <el-menu-item index="1">
+              <el-icon><UserFilled /></el-icon>
+              <template #title>个人信息</template>
+            </el-menu-item>
+            <el-menu-item index="2">
+              <el-icon><ScaleToOriginal /></el-icon>
+              <template #title>项目介绍</template>
+            </el-menu-item>
+            <el-menu-item index="3">
+              <el-icon><Connection /></el-icon>
+              <template #title>demo预览</template>
+            </el-menu-item>
+            <el-menu-item index="4">
+              <el-icon><Mug /></el-icon>
+              <template #title>个人兴趣</template>
+            </el-menu-item>
+          </el-menu>
+        </div>
         <el-container>
           <el-main>
             <div>
@@ -66,7 +100,7 @@
             </div>
             <div><RouterView /></div>
           </el-main>
-          <el-footer>Footer</el-footer>
+          <el-footer><Footer /></el-footer>
         </el-container>
       </el-container>
     </el-container>
@@ -84,11 +118,20 @@ import {
   getUserListByNameApi
 } from '@/utils/api'
 import { ElMessageBox } from 'element-plus'
-import { Search } from '@element-plus/icons-vue'
+import {
+  Search,
+  Mug,
+  Connection,
+  UserFilled,
+  ScaleToOriginal,
+  DArrowLeft,
+  DArrowRight
+} from '@element-plus/icons-vue'
 import { UserList } from '@/map/interface'
 import router from '@/router'
 import { messageError, messageSuccess, messageWarnDialog } from '@/utils/tips'
-const title = ref('这是首页')
+import Footer from '@/components/Footer.vue'
+const title = ref('个人简历')
 const userData = ref({
   name: '',
   address: ''
@@ -173,6 +216,14 @@ const editUser = (index: number) => {
   })
 }
 
+const isCollapse = ref(true)
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+
 onMounted(() => {
   console.log('路由', router.currentRoute.value)
 })
@@ -191,14 +242,37 @@ onMounted(() => {
 }
 .el-header {
   background-color: #95d475;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #409eff;
+  }
 }
-.el-aside {
+.page-aside {
+  position: relative;
   background-color: #b3e19d;
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    min-height: 400px;
+  }
+  .collapse {
+    position: absolute;
+    z-index: 100;
+    width: 30px;
+    right: -30px;
+  }
+  .el-menu {
+    background: none;
+  }
 }
 .el-container {
   background-color: #e1f3d8;
 }
 .el-footer {
+  overflow-y: scroll;
   background-color: #d1edc4;
+  height: 90px;
 }
 </style>

@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
       }
     ],
     meta: {
-      title: '用户中心',
+      title: '张涛',
       keepAlive: true,
       requireAuth: false
     },
@@ -22,11 +22,12 @@ const routes: Array<RouteRecordRaw> = [
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     meta: {
-      title: '错误页面',
+      title: '张涛',
       keepAlive: true,
       requireAuth: false
     },
-    component: () => import('@/pages/error/NotFound.vue')
+    // component: () => import('@/pages/error/NotFound.vue')
+    component: () => import('@/pages/Home.vue')
   }
 ]
 
