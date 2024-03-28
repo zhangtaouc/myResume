@@ -9,7 +9,7 @@ export function getUserListApi(): Promise<UserListResponse> {
 }
 
 export function getUserByNameApi(name: string): Promise<UserListResponse> {
-  return httpGet(`${apiUrl}/student/getStudentByName?name=${name}`)
+  return httpGet(`${apiUrl}/student/getStudentListByName?name=${name}`)
 }
 
 // 添加用户
@@ -24,5 +24,5 @@ export function editUserApi(body: User): Promise<UserListResponse> {
 
 // 删除用户
 export function deleteUserApi(username: string): Promise<UserListResponse> {
-  return httpDelete(`${apiUrl}/student/deleteStudent?name= ${username}`)
+  return httpDelete(`${apiUrl}/student/deleteStudent?name=${username}`)
 }
