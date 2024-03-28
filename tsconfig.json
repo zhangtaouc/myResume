@@ -4,6 +4,8 @@
       "node_modules/@types", // 默认值
       "src/types"
    ],
+   "skipLibCheck": true, // 取消依赖包进行类型校验，不然依赖包会疯狂报错
+   "noEmit": true,
     "target": "esnext",
     "useDefineForClassFields": true,
     "module": "esnext",
