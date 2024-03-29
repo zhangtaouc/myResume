@@ -2,19 +2,19 @@
   <div class="common-layout">
     <el-container>
       <el-header
-        ><div class="title">{{ title }}</div>
+        ><div class="title">.</div>
         <el-avatar> 张涛 </el-avatar>
       </el-header>
       <el-container>
         <div class="page-aside">
           <div class="collapse">
-            <el-icon size="30" color="white" @click="isCollapse = !isCollapse">
-              <DArrowLeft v-if="isCollapse" />
-              <DArrowRight v-else />
+            <el-icon size="30" color="black" @click="isCollapse = !isCollapse">
+              <CaretLeft v-if="isCollapse" />
+              <CaretRight v-else />
             </el-icon>
           </div>
           <el-menu
-            default-active="2"
+            default-active="1"
             class="el-menu-vertical-demo"
             :collapse="isCollapse"
             @open="handleOpen"
@@ -40,63 +40,68 @@
         </div>
         <el-container>
           <el-main>
-            <div>
-              <el-input
-                v-model="userData.name"
-                style="width: 240px"
-                placeholder="请输入名字"
-                clearable
-              />
-              <el-input
-                v-model="userData.address"
-                style="width: 240px"
-                placeholder="请输入地址"
-                clearable
-              />
-              <el-button type="primary" plain @click="addStudent"
-                >添加</el-button
-              >
-              <el-button type="success" plain @click="getUsers">获取</el-button>
-            </div>
-            <div>
+            <Person title="基本信息" @show-detail="showPerson" />
+            <div v-if="false" class="test">
               <div>
                 <el-input
-                  v-model="searchNameValue"
+                  v-model="userData.name"
                   style="width: 240px"
-                  size="large"
-                  placeholder="请输入姓名"
-                  :suffix-icon="Search"
-                /><el-button type="success" plain @click="getUserByName"
-                  >查询</el-button
+                  placeholder="请输入名字"
+                  clearable
+                />
+                <el-input
+                  v-model="userData.address"
+                  style="width: 240px"
+                  placeholder="请输入地址"
+                  clearable
+                />
+                <el-button type="primary" plain @click="addStudent"
+                  >添加</el-button
                 >
-                <el-button type="success" plain @click="getUserListByName"
-                  >模糊查询</el-button
+                <el-button type="success" plain @click="getUsers"
+                  >获取</el-button
                 >
               </div>
-              <el-table :data="userList" height="250" style="width: 550px">
-                <el-table-column prop="name" label="姓名" width="180" />
-                <el-table-column prop="address" label="地址" width="180" />
-                <el-table-column fixed="right" label="操作" width="120">
-                  <template #default="scope">
-                    <el-button
-                      link
-                      type="primary"
-                      size="small"
-                      @click.prevent="editUser(scope.$index)"
-                    >
-                      编辑
-                    </el-button>
-                    <el-button
-                      link
-                      type="primary"
-                      size="small"
-                      @click.prevent="deleteUser(scope.$index)"
-                    >
-                      删除
-                    </el-button>
-                  </template>
-                </el-table-column>
-              </el-table>
+              <div>
+                <div>
+                  <el-input
+                    v-model="searchNameValue"
+                    style="width: 240px"
+                    size="large"
+                    placeholder="请输入姓名"
+                    :suffix-icon="Search"
+                  /><el-button type="success" plain @click="getUserByName"
+                    >查询</el-button
+                  >
+                  <el-button type="success" plain @click="getUserListByName"
+                    >模糊查询</el-button
+                  >
+                </div>
+                <el-table :data="userList" height="250" style="width: 550px">
+                  <el-table-column prop="name" label="姓名" width="180" />
+                  <el-table-column prop="address" label="地址" width="180" />
+                  <el-table-column fixed="right" label="操作" width="120">
+                    <template #default="scope">
+                      <el-button
+                        link
+                        type="primary"
+                        size="small"
+                        @click.prevent="editUser(scope.$index)"
+                      >
+                        编辑
+                      </el-button>
+                      <el-button
+                        link
+                        type="primary"
+                        size="small"
+                        @click.prevent="deleteUser(scope.$index)"
+                      >
+                        删除
+                      </el-button>
+                    </template>
+                  </el-table-column>
+                </el-table>
+              </div>
             </div>
             <div><RouterView /></div>
           </el-main>
@@ -124,14 +129,14 @@ import {
   Connection,
   UserFilled,
   ScaleToOriginal,
-  DArrowLeft,
-  DArrowRight
+  CaretLeft,
+  CaretRight
 } from '@element-plus/icons-vue'
 import { UserList } from '@/map/interface'
 import router from '@/router'
 import { messageError, messageSuccess, messageWarnDialog } from '@/utils/tips'
 import Footer from '@/components/Footer.vue'
-const title = ref('个人简历')
+import Person from '@/components/Person.vue'
 const userData = ref({
   name: '',
   address: ''
@@ -146,6 +151,10 @@ const getUsers = () => {
     console.log('获取到数据', result)
     userList.value = result.retData
   })
+}
+
+const showPerson = () => {
+  console.log('点击')
 }
 
 const getUserByName = () => {
@@ -241,6 +250,7 @@ onMounted(() => {
   height: 100%;
 }
 .el-header {
+  backdrop-filter: blur(38px);
   background-color: #95d475;
   display: flex;
   align-items: center;

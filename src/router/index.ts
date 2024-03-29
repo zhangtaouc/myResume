@@ -37,6 +37,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  console.warn('路由守卫', to, from)
   if (to.meta && to.meta.title) {
     document.title = to.meta.title as string
   }

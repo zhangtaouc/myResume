@@ -10,7 +10,7 @@ export function getUserListApi(): Promise<UserListResponse> {
 
 // 模糊查询用户
 export function getUserListByNameApi(name: string): Promise<UserListResponse> {
-  return httpGet(`http://localhost:8081/student/getUserListByName?name=${name}`)
+  return httpGet(`${apiUrl}/student/getUserListByName?name=${name}`)
 }
 
 export function getUserByNameApi(name: string): Promise<UserListResponse> {
@@ -30,4 +30,10 @@ export function editUserApi(body: User): Promise<UserListResponse> {
 // 删除用户
 export function deleteUserApi(username: string): Promise<UserListResponse> {
   return httpDelete(`${apiUrl}/student/deleteStudent?name=${username}`)
+}
+
+// 获取本人信息
+
+export function getPersonalInfo(): Promise<UserListResponse> {
+  return httpGet(`${apiUrl}/me/getAll`)
 }
