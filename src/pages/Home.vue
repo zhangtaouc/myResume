@@ -251,7 +251,7 @@ onMounted(() => {
 }
 .el-header {
   backdrop-filter: blur(38px);
-  background-color: #95d475;
+  background-color: var(--home-header-bgcolor);
   display: flex;
   align-items: center;
   justify-content: space-between;
