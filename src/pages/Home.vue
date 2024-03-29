@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-header
-        ><div class="title">.</div>
+        ><div class="title">个人简历</div>
         <el-avatar> 张涛 </el-avatar>
       </el-header>
       <el-container>
@@ -20,19 +20,19 @@
             @open="handleOpen"
             @close="handleClose"
           >
-            <el-menu-item index="1">
+            <el-menu-item index="1" @click="selectTab(1)">
               <el-icon><UserFilled /></el-icon>
               <template #title>个人信息</template>
             </el-menu-item>
-            <el-menu-item index="2">
+            <el-menu-item index="2" @click="selectTab(2)">
               <el-icon><ScaleToOriginal /></el-icon>
               <template #title>项目介绍</template>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="3" @click="selectTab(3)">
               <el-icon><Connection /></el-icon>
               <template #title>demo预览</template>
             </el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item index="4" @click="selectTab(4)">
               <el-icon><Mug /></el-icon>
               <template #title>个人兴趣</template>
             </el-menu-item>
@@ -40,7 +40,13 @@
         </div>
         <el-container>
           <el-main>
-            <Person title="基本信息" @show-detail="showPerson" />
+            <div class="main-container">
+              <Person
+                v-if="tabIndex === 1"
+                title="基本信息"
+                @show-detail="showPerson"
+              />
+            </div>
             <div v-if="false" class="test">
               <div>
                 <el-input
@@ -144,6 +150,8 @@ const userData = ref({
 
 const searchNameValue = ref('')
 
+const tabIndex = ref(1)
+
 const userList: Ref<UserList> = ref([])
 
 const getUsers = () => {
@@ -233,6 +241,11 @@ const handleClose = (key: string, keyPath: string[]) => {
   console.log(key, keyPath)
 }
 
+const selectTab = (index: number) => {
+  console.log(index)
+  tabIndex.value = index
+}
+
 onMounted(() => {
   console.log('路由', router.currentRoute.value)
 })
@@ -240,7 +253,9 @@ onMounted(() => {
 
 <style scoped lang="less">
 .common-layout {
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
 }
@@ -278,11 +293,20 @@ onMounted(() => {
   }
 }
 .el-container {
+  position: relative;
   background-color: #e1f3d8;
+  .el-main {
+    padding: 0;
+    overflow-y: auto;
+  }
+  .main-container {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+  }
 }
 .el-footer {
-  overflow-y: scroll;
   background-color: #d1edc4;
-  height: 90px;
+  height: 150px;
 }
 </style>
