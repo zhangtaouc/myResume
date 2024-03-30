@@ -46,6 +46,7 @@
                 title="基本信息"
                 @show-detail="showPerson"
               />
+              <Projects v-if="tabIndex === 2" />
             </div>
             <div v-if="false" class="test">
               <div>
@@ -142,6 +143,7 @@ import { UserList } from '@/map/interface'
 import router from '@/router'
 import { messageError, messageSuccess, messageWarnDialog } from '@/utils/tips'
 import Footer from '@/components/Footer.vue'
+import Projects from '@/components/Projects.vue'
 import Person from '@/components/Person.vue'
 const userData = ref({
   name: '',
@@ -301,12 +303,13 @@ onMounted(() => {
   }
   .main-container {
     box-sizing: border-box;
+    padding-top: 1px;
     width: 100%;
     height: 100%;
   }
 }
 .el-footer {
   background-color: #d1edc4;
-  height: 150px;
+  height: 120px;
 }
 </style>

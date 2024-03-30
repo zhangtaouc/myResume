@@ -73,6 +73,7 @@
       </el-card>
     </div>
   </div>
+  <div v-else class="person"><el-empty description="数据加载中...." /></div>
 </template>
 <script setup lang="ts">
 import { PersonInfo, SkillList } from '@/utils/Type'

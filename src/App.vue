@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+// 颜色主题
+document.documentElement.setAttribute('data-theme', 'light')
+</script>
 
 <template>
   <RouterView />
