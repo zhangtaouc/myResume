@@ -5,7 +5,7 @@ interface requestMethod {
 
 // 接口数据
 interface responseData {
-  data: any
+  retData: any
 }
 
 // 接口入参
@@ -22,18 +22,4 @@ interface UserList {
   [index: number]: User
 }
 
-// 用户列表响应数据格式
-interface UserListResponse {
-  data: {
-    userList: UserList
-  }
-}
-
-export {
-  User,
-  UserList,
-  UserListResponse,
-  requestMethod,
-  responseData,
-  requestData
-}
+export { User, UserList, requestMethod, responseData, requestData }

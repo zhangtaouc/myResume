@@ -1,5 +1,6 @@
+import { UserListResponse } from './Type'
 import { httpGet, httpPost, httpDelete } from './request'
-import { UserListResponse, User } from '@/map/interface'
+import { User } from '@/map/interface'
 
 const apiUrl = 'http://1.94.101.51:8081'
 
@@ -36,4 +37,9 @@ export function deleteUserApi(username: string): Promise<UserListResponse> {
 
 export function getPersonalInfo(): Promise<UserListResponse> {
   return httpGet(`${apiUrl}/me/getAll`)
+}
+
+// 获取信息
+export function getUserInfo(): Promise<UserListResponse> {
+  return httpGet(`${apiUrl}/me/getUserInfo`)
 }

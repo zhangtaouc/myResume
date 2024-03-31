@@ -309,7 +309,7 @@ onMounted(() => {
   }
 }
 .el-footer {
-  background-color: #d1edc4;
-  height: 120px;
+  background-color: var(--home-footer-bgcolor);
+  height: 100px !important;
 }
 </style>

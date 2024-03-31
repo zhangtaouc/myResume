@@ -35,11 +35,19 @@
               <span>{{ personInfo.workTotlTime }}</span>
             </p>
             <p class="text item">
-              <el-text class="mx-1" type="primary" size="large">联系：</el-text>
-              <span
-                >13184136227<el-text class="mx-1" type="primary"> / </el-text
-                >3131966940@qq.com</span
-              >
+              <el-text class="mx-1" type="primary" size="large">电话：</el-text>
+
+              <span>{{ personInfo.phoneNumber }}</span>
+            </p>
+            <p class="text item">
+              <el-text class="mx-1" type="primary" size="large">邮箱：</el-text>
+
+              <span>{{ personInfo.email }}</span>
+            </p>
+            <p class="text item">
+              <el-text class="mx-1" type="primary" size="large">地址：</el-text>
+
+              <span>{{ personInfo.address }}</span>
             </p>
           </div>
           <div class="right">
@@ -76,17 +84,15 @@
   <div v-else class="person"><el-empty description="数据加载中...." /></div>
 </template>
 <script setup lang="ts">
-import { PersonInfo, SkillList } from '@/utils/Type'
+import { useBaseStore } from '@/store/base'
 import { Promotion, Avatar } from '@element-plus/icons-vue'
-import { getPersonalInfo } from '@/utils/api'
-import { ref } from 'vue'
-import { messageSuccess } from '@/utils/tips'
+import { computed } from 'vue'
 
 defineOptions({ name: 'Person' })
 
-const personInfo = ref({} as PersonInfo)
+const personInfo = computed(() => useBaseStore().userInfo)
 
-const mySkills = ref<SkillList>([])
+const mySkills = computed(() => useBaseStore().userSkill)
 
 const props = defineProps({
   title: {
@@ -97,19 +103,7 @@ const props = defineProps({
 const emit = defineEmits(['showDetail'])
 const showPart = () => emit('showDetail')
 
-const initApp = () => {
-  getPersonalInfo().then((result: any) => {
-    console.log('个人信息', result)
-    const data = result.retData
-    if (data) {
-      personInfo.value = data.me
-      mySkills.value = data.mySkills
-      setTimeout(() => {
-        messageSuccess('数据加载成功')
-      }, 800)
-    }
-  })
-}
+const initApp = () => {}
 
 initApp()
 </script>

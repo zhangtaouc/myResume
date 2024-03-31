@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { init } from './utils/init'
 // 颜色主题
 document.documentElement.setAttribute('data-theme', 'light')
+init()
 </script>
 
 <template>
