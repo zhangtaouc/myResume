@@ -18,7 +18,8 @@
     "pinia": "^2.1.7",
     "pnpm": "^8.15.5",
     "vue": "^3.3.11",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "zt-vue3-component": "^0.0.3"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
