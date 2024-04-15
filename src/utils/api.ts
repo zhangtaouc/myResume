@@ -2,7 +2,7 @@ import { UserListResponse } from './Type'
 import { httpGet, httpPost, httpDelete } from './request'
 import { User } from '@/map/interface'
 
-const apiUrl = 'http://1.94.101.51:8081'
+const apiUrl = 'https://zhangtaoo.cn/api'
 
 // 查询全部用户
 export function getUserListApi(): Promise<UserListResponse> {
@@ -41,5 +41,5 @@ export function getPersonalInfo(): Promise<UserListResponse> {
 
 // 获取信息
 export function getUserInfo(): Promise<UserListResponse> {
-  return httpGet(`${apiUrl}/me/getUserInfo`)
+  return httpGet(`${apiUrl}/me/getMeInfos`)
 }
