@@ -2,7 +2,7 @@
   <div class="common-layout">
     <el-container>
       <el-header
-        ><div class="title">个人简历</div>
+        ><div class="title">123</div>
         <el-avatar> 张涛 </el-avatar>
       </el-header>
       <el-container>
@@ -30,7 +30,7 @@
             </el-menu-item>
             <el-menu-item index="3" @click="selectTab(3)">
               <el-icon><Connection /></el-icon>
-              <template #title>demo预览</template>
+              <template #title>证件</template>
             </el-menu-item>
             <el-menu-item index="4" @click="selectTab(4)">
               <el-icon><Mug /></el-icon>
@@ -47,6 +47,7 @@
                 @show-detail="showPerson"
               />
               <Projects v-if="tabIndex === 2" />
+              <Document v-if="tabIndex === 3" />
             </div>
             <div v-if="false" class="test">
               <div>
@@ -142,6 +143,7 @@ import {
 import { UserList } from '@/map/interface'
 import router from '@/router'
 import { messageError, messageSuccess, messageWarnDialog } from '@/utils/tips'
+import Document from '@/components/Document.vue'
 import Footer from '@/components/Footer.vue'
 import Projects from '@/components/Projects.vue'
 import Person from '@/components/Person.vue'

@@ -5,3 +5,4 @@ index.html
 .eslintrc.cjs
 components.d.ts
 package.json
+main.ts
