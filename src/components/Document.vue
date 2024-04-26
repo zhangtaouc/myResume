@@ -26,11 +26,9 @@
         </el-card>
       </div>
     </div>
-    <Search />
   </div>
 </template>
 <script setup lang="ts">
-import { Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 defineOptions({ name: 'Document' })
 
