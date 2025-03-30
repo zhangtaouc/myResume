@@ -1,14 +1,32 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
+    children: [
+      {
+        path: 'hello',
+        component: () => import('@/components/HelloWorld.vue')
+      }
+    ],
     meta: {
-        title: '首页',
-        keepAlive: true,
-        requireAuth: false
+      title: '张涛',
+      keepAlive: true,
+      requireAuth: false
     },
+    component: () => import('@/pages/Home.vue')
+  },
+  {
+    // 匹配不到的页面
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    meta: {
+      title: '张涛',
+      keepAlive: true,
+      requireAuth: false
+    },
+    // component: () => import('@/pages/error/NotFound.vue')
     component: () => import('@/pages/Home.vue')
   }
 ]
@@ -16,5 +34,13 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(),
   routes
-});
-export default router;
+})
+
+router.beforeEach((to, from, next) => {
+  console.warn('路由守卫', to, from)
+  if (to.meta && to.meta.title) {
+    document.title = to.meta.title as string
+  }
+  next()
+})
+export default router

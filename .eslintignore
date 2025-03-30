@@ -1,3 +1,8 @@
 node_modules/
 dist/
 index.html
+.eslintrc.js
+.eslintrc.cjs
+components.d.ts
+package.json
+main.ts
